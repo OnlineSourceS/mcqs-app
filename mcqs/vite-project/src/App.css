@@ -1,0 +1,244 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-container input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.question {
+  margin: 2rem 0;
+}
+
+.question textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #535bf2;
+}
+
+.answer-review {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+
+.timer {
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timer-label {
+  display: block;
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.timer-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.timer-value {
+  background: #000;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  min-width: 2.5rem;
+  text-align: center;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.timer-separator {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.instructions {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.instructions h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.instructions h3 {
+  color: #666;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.instructions h4 {
+  color: #444;
+  margin: 1rem 0;
+}
+
+.instructions-content {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.instructions ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.instructions li {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #444;
+}
+
+.instructions li:before {
+  content: "•";
+  color: #646cff;
+  position: absolute;
+  left: 0;
+}
+
+.start-test-button {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.start-test-button button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background: #646cff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.start-test-button button:hover {
+  background: #535bf2;
+}
