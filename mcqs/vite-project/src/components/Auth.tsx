@@ -24,7 +24,7 @@ export function Auth() {
   }
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}> 
+    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh'}}> 
     <div className="auth-container">
       <h2>{isLogin ? 'Welcome Back' : 'Create Account'}</h2>
       <form onSubmit={handleSubmit}>
