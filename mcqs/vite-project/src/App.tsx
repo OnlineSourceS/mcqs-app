@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import { supabase } from './lib/supabase';
 import { AuthProvider } from './contexts/AuthContext'
 import { Auth } from './components/Auth'
 import { QuestionForm } from './components/QuestionForm'
@@ -13,8 +15,24 @@ function AppContent() {
   return (
    <>
       <header>
-        <h1>Techmile Solutions</h1>
-        {user && <p>Welcome, {user.email}</p>}
+        <div className="header-content">
+          <h1>Techmile Solutions</h1>
+          <div className="header-right" style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+            {user && (
+              <>
+                <p>Welcome, {user.email}</p>
+                <button 
+                  onClick={() => supabase.auth.signOut()}
+                  className="signout-btn"
+                  style={{
+                    marginTop: '10px'
+                  }}>
+                  Sign Out
+                </button>
+              </>
+            )}
+          </div>
+        </div>
       </header>
       <main>
         {!user ? (
