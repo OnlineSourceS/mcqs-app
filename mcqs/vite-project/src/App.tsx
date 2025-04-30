@@ -5,7 +5,7 @@ import { QuestionForm } from './components/QuestionForm'
 import { AdminDashboard } from './components/AdminDashboard'
 import { useAuth } from './contexts/AuthContext'
 import './App.css'
-
+import logo from './assets/logo.png'
 function AppContent() {
   const { user } = useAuth()
 
@@ -15,7 +15,10 @@ function AppContent() {
    <>
       <header>
         <div className="header-content">
-          <h1>Techmile Solutions</h1>
+          <h1 style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+            <img src={logo} alt="Techmile Solutions" style={{width: '50px', height: '50px'}} />
+            <span style={{fontSize: '20px', fontWeight: 'bold'}}>Techmile Solutions </span>
+          </h1>
           <div className="header-right" style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
             {user && (
               <>
