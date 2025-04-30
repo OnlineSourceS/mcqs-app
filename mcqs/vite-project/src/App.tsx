@@ -9,11 +9,11 @@ function AppContent() {
   const { user } = useAuth()
 
   const isAdmin = user?.email === 'admin@admin.com' || user?.email === 'admin@gmail.com'
-
+  console.log(user, 'user')
   return (
     <div className="app">
       <header>
-        <h1>Techmile Testing App</h1>
+        <h1>Techmile Solutions</h1>
         {user && <p>Welcome, {user.email}</p>}
       </header>
       <main>

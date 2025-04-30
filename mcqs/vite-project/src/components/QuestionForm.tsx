@@ -270,7 +270,7 @@ export function QuestionForm() {
     minutes: 0,
     seconds: 0
   })
-  const [isTimeUp, setIsTimeUp] = useState(false)
+  // const [isTimeUp, setIsTimeUp] = useState(false)
   const [timerStarted, setTimerStarted] = useState(false)
   const [currentSection, setCurrentSection] = useState<string>('')
 
