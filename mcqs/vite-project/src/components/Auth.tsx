@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
+import './Auth.css'
 
 export function Auth() {
   const [email, setEmail] = useState('')
@@ -7,38 +8,45 @@ export function Auth() {
   const [name, setName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [isLogin, setIsLogin] = useState(true)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
   const { signIn, signUp } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError('')
+    setSuccess('')
     try {
       if (isLogin) {
         await signIn(email, password)
+        setSuccess('Login successful!')
       } else {
         await signUp(email, password, name, phoneNumber)
+        setSuccess('Account created successfully!')
       }
     } catch (error) {
-      console.error('Error:', error)
+      setError(error instanceof Error ? error.message : 'An error occurred')
     }
   }
 
   return (
     <div className="auth-container">
-      <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
+      <h2>{isLogin ? 'Welcome Back' : 'Create Account'}</h2>
       <form onSubmit={handleSubmit}>
         {!isLogin && (
           <>
-            <div>
-              <label>Name:</label>
+            <div className="form-group">
+              <label>Full Name</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required={!isLogin}
+                placeholder="Enter your full name"
               />
             </div>
-            <div>
-              <label>Phone Number:</label>
+            <div className="form-group">
+              <label>Phone Number</label>
               <input
                 type="tel"
                 value={phoneNumber}
@@ -46,32 +54,40 @@ export function Auth() {
                 required={!isLogin}
                 pattern="[0-9]{10}"
                 title="Please enter a 10-digit phone number"
+                placeholder="Enter your phone number"
               />
             </div>
           </>
         )}
-        <div>
-          <label>Email:</label>
+        <div className="form-group">
+          <label>Email</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder="Enter your email"
           />
         </div>
-        <div>
-          <label>Password:</label>
+        <div className="form-group">
+          <label>Password</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder="Enter your password"
           />
         </div>
-        <button type="submit">{isLogin ? 'Login' : 'Sign Up'}</button>
+        {error && <div className="error-message">{error}</div>}
+        {success && <div className="success-message">{success}</div>}
+        <button type="submit">{isLogin ? 'Sign In' : 'Sign Up'}</button>
       </form>
-      <button onClick={() => setIsLogin(!isLogin)}>
-        {isLogin ? 'Need an account? Sign Up' : 'Already have an account? Login'}
+      <button 
+        className="toggle-auth-btn"
+        onClick={() => setIsLogin(!isLogin)}
+      >
+        {isLogin ? 'Need an account? Sign Up' : 'Already have an account? Sign In'}
       </button>
     </div>
   )
