@@ -8,28 +8,23 @@ export function Auth() {
   const [name, setName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [isLogin, setIsLogin] = useState(true)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
   const { signIn, signUp } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError('')
-    setSuccess('')
     try {
       if (isLogin) {
         await signIn(email, password)
-        setSuccess('Login successful!')
       } else {
         await signUp(email, password, name, phoneNumber)
-        setSuccess('Account created successfully!')
       }
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'An error occurred')
+      console.error('Error:', error)
     }
   }
 
   return (
+    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}> 
     <div className="auth-container">
       <h2>{isLogin ? 'Welcome Back' : 'Create Account'}</h2>
       <form onSubmit={handleSubmit}>
@@ -60,7 +55,7 @@ export function Auth() {
           </>
         )}
         <div className="form-group">
-          <label>Email</label>
+          <label>Email Address</label>
           <input
             type="email"
             value={email}
@@ -79,16 +74,17 @@ export function Auth() {
             placeholder="Enter your password"
           />
         </div>
-        {error && <div className="error-message">{error}</div>}
-        {success && <div className="success-message">{success}</div>}
-        <button type="submit">{isLogin ? 'Sign In' : 'Sign Up'}</button>
+        <button type="submit">
+          {isLogin ? 'Sign In' : 'Sign Up'}
+        </button>
       </form>
       <button 
-        className="toggle-auth-btn"
         onClick={() => setIsLogin(!isLogin)}
+        style={{ marginTop: '1rem' }}
       >
         {isLogin ? 'Need an account? Sign Up' : 'Already have an account? Sign In'}
       </button>
+    </div>
     </div>
   )
 } 
