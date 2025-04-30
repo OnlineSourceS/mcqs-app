@@ -462,11 +462,9 @@ export function QuestionForm() {
             <span className="timer-separator">:</span>
             <span className="timer-value">{formatTime(timeLeft.seconds)}</span>
           </div>
-        </div>
-        <div className="question-section">
-          {/* Review section removed as per requirements */}
-        </div>
+        </div> 
         <div className="answer-section">
+            <span>Thank you for completing the test!</span>
           <div className="question-navigation">
             <button onClick={() => setCurrentStep(currentStep - 1)}>Back</button>
             <button onClick={handleSubmit}>Submit</button>
