@@ -38,61 +38,244 @@ export function QuestionForm() {
   // Questions organized by sections
   const sections = {
     'Section 1: Programming and Problem Solving (20 minutes)': [
-      { id: 1, text: `<p>Write a function that takes an array of integers and returns the pair of integers whose sum is closest to zero. If there are multiple pairs with the same closest sum, return any one of them.</p>
-
-        - Example:
-Input: [1, 4, -3, -1, 5, 9],
-Output: [1, -1]
-</p>`, section: 'Section 1: Programming and Problem Solving (20 minutes)', recommendedTime: '20 minutes' },
-
-
-      { id: 2, text: `<p>Write a function that checks if two strings are anagrams of each other, ignoring spaces and case sensitivity.
-Example:
-Input: "Listen", "Silent"
-Output: true
-
-Input: "Hello", "World"
-Output: false
-</p>`, section: 'Section 2: Object-Oriented Programming (15 minutes)', recommendedTime: '15 minutes' },
-
-      { id: 3, text: `<p>Design a simple Library Management System using OOP principles. Your system should include the following classes:
-Book
-Author
-Library
-User
+      { id: 1, text: `<div class="question-container">
+        <div class="question-description" style="text-align: left;">
+          Write a function that takes an array of integers and returns the pair of integers whose sum is closest to zero. If there are multiple pairs with the same closest sum, return any one of them.
+        </div>
+        <div class="example-section" style="text-align: left;">
+          <h4>Example:</h4>
+          <div class="code-block">
+            <strong>Input:</strong> [1, 4, -3, -1, 5, 9]<br/>
+            <strong>Output:</strong> [1, -1]
+          </div>
+        </div>
+      </div>`, section: 'Section 1: Programming and Problem Solving (20 minutes)', recommendedTime: '20 minutes' },
+      { id: 2, text: `<div class="question-container">
+        <div class="question-description" style="text-align: left;">
+          Write a function that checks if two strings are anagrams of each other, ignoring spaces and case sensitivity.
+        </div>
+        <div class="example-section" style="text-align: left;">
+          <h4>Example:</h4>
+          <div class="code-block" style="text-align: left;">
+            <strong>Input:</strong> "Listen", "Silent"<br/>
+            <strong>Output:</strong> true<br/>
+            <strong>Input:</strong> "Hello", "World"<br/>
+            <strong>Output:</strong> false
+          </div>
+        </div>
+      </div>`, section: 'Section 1: Programming and Problem Solving (20 minutes)', recommendedTime: '20 minutes' }
+    ],
+    'Section 2: Object-Oriented Programming (15 minutes)': [
+      { id: 3, text: `<div class="question-container">
+        <div class="question-description" style="text-align: left;">
+          Design a simple Library Management System using OOP principles. Your system should include the following classes:
+          <ul style="text-align: left; padding-left: 20px;">
+            <li>Book</li>
+            <li>Author</li>
+            <li>Library</li>
+            <li>User</li>
+          </ul>
 The system aims to have functionality for:
-Adding books to the library
-Checking out books
-Returning books
-Searching for books by title or author
-Draw a class diagram to capture the relationships, write function signatures that would be present for each class. (you do not need to write the whole logic)
+          <ul style="text-align: left; padding-left: 20px;">
+            <li>Adding books to the library</li>
+            <li>Checking out books</li>
+            <li>Returning books</li>
+            <li>Searching for books by title or author</li>
+          </ul>
+Draw a class diagram to capture the relationships
+Write function signatures that would be present for each class. (you do not need to write the whole logic) <br/> <br/>
 Ensure proper encapsulation, inheritance (where appropriate), and demonstrate polymorphism.
-</p>`, section: 'Section 2: Object-Oriented Programming (15 minutes)', recommendedTime: '15 minutes' }
+        </div>
+      </div>`, section: 'Section 2: Object-Oriented Programming (15 minutes)', recommendedTime: '15 minutes' },
+      { id: 4, text: `<div class="question-container">
+        <div class="question-description" style="text-align: left;">
+          Explain the Singleton design pattern. Discuss one scenario where using a Singleton would be appropriate and one scenario where it should be avoided.
+        </div>
+      </div>`, section: 'Section 2: Object-Oriented Programming (15 minutes)', recommendedTime: '15 minutes' }
     ],
-    'Networking': [
-      { id: 4, text: 'Compare and contrast TCP and UDP protocols. When would you choose one over the other?', section: 'Networking', recommendedTime: '10 minutes' },
-      { id: 5, text: 'Explain the OSI model and its layers. How does it relate to modern networking?', section: 'Networking', recommendedTime: '10 minutes' }
+    'Section 3: Database (20 minutes)': [
+      { id: 5, text: `<div class="question-container">
+        <div class="question-description" style="text-align: left;">
+          Given the following database schema:
+        </div> <br/>
+        <div class="example-section">
+          <div class="code-block" style="text-align: left;">
+            <strong>Employees</strong>
+            <ul style="text-align: left; padding-left: 20px;">
+              <li>id (INT, Primary Key)</li>
+              <li>name (VARCHAR)</li>
+              <li>department_id (INT, Foreign Key)</li>
+              <li>salary (DECIMAL)</li>
+              <li>hire_date (DATE)</li>
+              <li>manager_id (INT, Foreign Key referencing id)</li>
+            </ul>
+            <strong>Departments</strong>
+            <ul style="text-align: left; padding-left: 20px;">
+              <li>id (INT, Primary Key)</li>
+              <li>name (VARCHAR)</li>
+              <li>location (VARCHAR)</li>
+              <li>budget (DECIMAL)</li>
+            </ul>
+            <strong>Projects</strong>
+            <ul style="text-align: left; padding-left: 20px;">
+              <li>id (INT, Primary Key)</li>
+              <li>name (VARCHAR)</li>
+              <li>start_date (DATE)</li>
+              <li>end_date (DATE)</li>
+              <li>department_id (INT, Foreign Key)</li>
+            </ul>
+            <strong>EmployeeProjects</strong>
+            <ul style="text-align: left; padding-left: 20px;">
+              <li>employee_id (INT, Foreign Key)</li>
+              <li>project_id (INT, Foreign Key)</li>
+              <li>hours_worked (INT)</li>
+              <li>role (VARCHAR)</li>
+            </ul>
+          </div>
+          <h4 style="text-align: left;">Write SQL queries for:</h4>
+          <ol type="a" style="text-align: left; padding-left: 20px;">
+            <li>Find all employees in the "Engineering" department sorted by their salary in descending order.</li>
+            <li>List all projects along with the total number of employees assigned to each project.</li>
+            <li>Find the department with the highest average salary.</li>
+          </ol>
+        </div>
+      </div>`, section: 'Section 3: Database (20 minutes)', recommendedTime: '20 minutes' },
+      { id: 6, text: `<div class="question-container">
+        <div class="question-description" style="text-align: left;">
+          Design a database schema for an e-commerce platform with the following requirements:
+        </div>
+        <div class="example-section">
+          <ul style="text-align: left; padding-left: 20px;">
+            <li>Users can create accounts and place orders</li>
+            <li>Products belong to multiple categories</li>
+            <li>Orders contain multiple products with quantities</li>
+            <li>Users can leave reviews for products they've purchased</li>
+            <li>Products have inventory tracking</li>
+          </ul>
+            Draw the ER diagram and write the CREATE TABLE statements with proper constraints
+        </div>
+      </div>`, section: 'Section 3: Database (20 minutes)', recommendedTime: '20 minutes' }
     ],
-    'Programming Languages': [
-      { id: 6, text: 'What is the difference between a compiler and an interpreter? Discuss the advantages and disadvantages of each.', section: 'Programming Languages', recommendedTime: '10 minutes' },
-      { id: 7, text: 'Explain the concept of garbage collection in programming languages. How does it work in your preferred language?', section: 'Programming Languages', recommendedTime: '10 minutes' }
+    'Section 4: Networking and Web (20 minutes)': [
+      { id: 7, text: `<div class="question-container">
+        <div class="question-description" style="text-align: left;">
+          Explain the following concepts:
+        </div>
+        <div class="example-section">
+          <ul style="text-align: left; padding-left: 20px;">
+            <li>Difference between HTTP methods GET, POST, PUT, and DELETE</li>
+            <li>RESTful API design principles</li>
+            <li>HTTP status codes and their meanings</li>
+            <li>Web cookies and their purpose</li>
+          </ul>
+        </div>
+      </div>`, section: 'Section 4: Networking and Web (20 minutes)', recommendedTime: '20 minutes' },
+      { id: 8, text: `<div class="question-container">
+        <div class="question-description" style="text-align: left;">
+          Answer the following questions briefly:
+        </div>
+        <div class="example-section">
+          <ol type="a" style="text-align: left; padding-left: 20px;">
+            <li>What are the differences between TCP and UDP protocols? When would you use one over the other?</li>
+            <li>Describe the process of DNS resolution from typing a URL in a browser to loading the webpage.</li>
+            <li>What is HTTPS? How does it differ from HTTP in terms of security?</li>
+          </ol>
+        </div>
+      </div>`, section: 'Section 4: Networking and Web (20 minutes)', recommendedTime: '20 minutes' }
     ],
-    'Object-Oriented Programming': [
-      { id: 8, text: 'Explain the four main principles of Object-Oriented Programming with examples.', section: 'Object-Oriented Programming', recommendedTime: '15 minutes' },
-      { id: 9, text: 'What is the difference between abstraction and encapsulation? Provide code examples.', section: 'Object-Oriented Programming', recommendedTime: '15 minutes' }
+    'Section 5: Software Engineering Principles (15 minutes)': [
+      { id: 9, text: `<div class="question-container">
+        <div class="question-description" style="text-align: left;">
+          Write unit tests for the following function using any testing framework of your choice:
+        </div>
+        <div class="example-section">
+          <div class="code-block" style="text-align: left;">
+            <pre><code>function calculateDiscount(purchaseAmount, membershipLevel) {
+  if (membershipLevel === 'gold') {
+    return purchaseAmount * 0.15;
+  } else if (membershipLevel === 'silver') {
+    return purchaseAmount * 0.10;
+  } else if (membershipLevel === 'bronze') {
+    return purchaseAmount * 0.05;
+  } else {
+    return 0;
+  }
+}</code></pre>
+            Write test cases that cover all possible scenarios and edge cases. You can write pseudo code.
+      </div>`, section: 'Section 5: Software Engineering Principles (15 minutes)', recommendedTime: '15 minutes' },
+      { id: 10, text: `<div class="question-container">
+        <div class="question-description">
+          <ol style="text-align: left; padding-left: 20px;">
+            <li>What is a Git branch and how would you use branching in a team development environment?</li>
+            <li>What are some DevOps practices that can improve the software development process?</li>
+          </ol>
+        </div>
+      </div>`, section: 'Section 5: Software Engineering Principles (15 minutes)', recommendedTime: '15 minutes' }
     ],
-    'Databases': [
-      { id: 10, text: 'Explain database normalization and its benefits. Provide examples of different normal forms.', section: 'Databases', recommendedTime: '15 minutes' },
-      { id: 11, text: 'Compare SQL and NoSQL databases. When would you choose one over the other?', section: 'Databases', recommendedTime: '15 minutes' }
+    'Section 6: Practical Implementation (30 minutes)': [
+      { id: 11, text: `<div class="question-container">
+        <div class="question-description" style="text-align: left;">
+          Implement a simple task management application with the following features:
+        </div>
+        <div class="example-section" style="text-align: left;">
+          <ul style="text-align: left; padding-left: 20px;">
+            <li>Display a list of tasks (title, description, due date, status)</li>
+            <li>Add a new task</li>
+            <li>Mark a task as complete</li>
+            <li>Delete a task</li>
+          </ul>
+          You can choose any of the following technology stacks:
+          <ol style="text-align: left; padding-left: 20px;">
+            <li>Frontend: HTML, CSS, JavaScript (vanilla or with a framework) Backend: RESTful API using language of your choice</li>
+            <li>Console-based application in your language of choice with file-based storage</li>
+          </ol>
+          <h4>Data for tasks.json:</h4>
+          <div class="code-block" style="text-align: left;">
+            <pre><code>[
+  {
+    "id": 1,
+    "title": "Complete project proposal",
+    "description": "Draft the proposal for the new client project",
+    "dueDate": "2025-05-10",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "title": "Review pull requests",
+    "description": "Review and merge team pull requests",
+    "dueDate": "2025-04-30",
+    "completed": true
+  },
+  {
+    "id": 3,
+    "title": "Update documentation",
+    "description": "Update API documentation with new endpoints",
+    "dueDate": "2025-05-05",
+    "completed": false
+  },
+  {
+    "id": 4,
+    "title": "Fix login bug",
+    "description": "Address the authentication issue reported by QA",
+    "dueDate": "2025-04-29",
+    "completed": false
+  }
+]</code></pre>
+          </div>
+          Focus on code quality, organization, and proper implementation of software design principles.
+        </div>
+      </div>`, section: 'Section 6: Practical Implementation (30 minutes)', recommendedTime: '30 minutes' }
     ],
-    'Software Development': [
-      { id: 12, text: 'Explain the concept of version control and its importance in software development.', section: 'Software Development', recommendedTime: '10 minutes' },
-      { id: 13, text: 'What is the difference between synchronous and asynchronous programming? Provide examples.', section: 'Software Development', recommendedTime: '10 minutes' }
-    ],
-    'Bonus': [
-      { id: 14, text: 'Design a scalable system architecture for a social media platform. Consider aspects like data storage, caching, and load balancing.', section: 'Bonus', recommendedTime: '20 minutes' }
+    'Bonus Question (Optional)': [
+      { id: 12, text: `<div class="question-container">
+        <div class="question-description" style="text-align: left;">
+          Explain the concept of memory leaks, how they occur in different programming languages, and strategies to prevent them. Provide a small code example in your preferred language that demonstrates a potential memory leak and how to fix it.
+        </div>
+      </div>`, section: 'Bonus Question (Optional)', recommendedTime: '20 minutes' }
     ]
   }
+
+
 
   const allQuestions = Object.values(sections).flat()
 
@@ -313,7 +496,9 @@ Ensure proper encapsulation, inheritance (where appropriate), and demonstrate po
           <span className="timer-value">{formatTime(timeLeft.seconds)}</span>
         </div>
       </div>
-      <div className="question-section">
+      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between',  }}>
+
+      <div className="question-section"  style={{flex: 1}}>
         <div className="section-header">
           <h2>{currentSection}</h2>
           <p className="recommended-time">Recommended Time: {allQuestions[currentStep].recommendedTime}</p>
@@ -322,13 +507,14 @@ Ensure proper encapsulation, inheritance (where appropriate), and demonstrate po
           {/* <h3>{allQuestions[currentStep].text}</h3> */}
           <div dangerouslySetInnerHTML={{ __html: allQuestions[currentStep].text }} />
         </div>
-      </div>
-      <div className="answer-section">
+      </div> 
+      <div className="answer-section" style={{flex: 1}}>
         <textarea
           value={currentAnswer}
           onChange={(e) => setCurrentAnswer(e.target.value)}
+          style={{ width: '90%', height: '100px', border: '1px solid #ccc', borderRadius: '5px', padding: '10px' }}
           placeholder="Type your answer here..."
-        />
+          />
         <div className="question-navigation">
           <div className="question-progress">
             Question {currentStep + 1} of {allQuestions.length}
@@ -344,6 +530,7 @@ Ensure proper encapsulation, inheritance (where appropriate), and demonstrate po
             </button>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

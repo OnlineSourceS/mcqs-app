@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { User } from '@supabase/supabase-js'
+import { TABLES } from '../constants/supabase'
 
 interface AuthContextType {
   user: User | null
   signIn: (email: string, password: string) => Promise<void>
-  signUp: (email: string, password: string) => Promise<void>
+  signUp: (email: string, password: string, name: string, phoneNumber: string) => Promise<void>
   signOut: () => Promise<void>
 }
 
@@ -33,9 +34,33 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (error) throw error
   }
 
-  const signUp = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signUp({ email, password })
-    if (error) throw error
+  const signUp = async (email: string, password: string, name: string, phoneNumber: string) => {
+    const { data, error: signUpError } = await supabase.auth.signUp({ 
+      email, 
+      password,
+      options: {
+        data: {
+          name,
+          phone_number: phoneNumber
+        }
+      }
+    })
+    
+    if (signUpError) throw signUpError
+
+    if (data.user) {
+      // Store additional user data in the users table
+      const { error: profileError } = await supabase
+        .from(TABLES.USERS)
+        .insert({
+          id: data.user.id,
+          email: email,
+          name: name,
+          phone_number: phoneNumber
+        })
+
+      if (profileError) throw profileError
+    }
   }
 
   const signOut = async () => {
