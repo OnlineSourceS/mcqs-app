@@ -209,7 +209,7 @@ main > div {
 }
 
 .form-container {
-  width: 44rem;
+  /* width: 44rem; */
   margin: 0 auto;
   padding: 2rem;
   /* border: 1px solid #ccc; */

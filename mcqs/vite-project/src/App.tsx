@@ -33,7 +33,7 @@ function AppContent() {
           </div>
         </div>
       </header>
-      <main>
+      <main style={{height: '100vh'}}>
         {!user ? (
           <Auth />
         ) : isAdmin ? (

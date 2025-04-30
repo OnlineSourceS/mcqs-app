@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import { TABLES } from '../constants/supabase'
+import './QuestionForm.css'
 
 interface Answer {
   questionId: number
@@ -463,13 +464,7 @@ export function QuestionForm() {
           </div>
         </div>
         <div className="question-section">
-          {/* {answers.map((answer, index) => (
-            <div key={index} className="answer-review">
-              <h3>Question {index + 1}:</h3>
-              <p>{allQuestions[index].text}</p>
-              <p>Answer: {answer.answer}</p>
-            </div>
-          ))} */}
+          {/* Review section removed as per requirements */}
         </div>
         <div className="answer-section">
           <div className="question-navigation">
@@ -493,41 +488,38 @@ export function QuestionForm() {
           <span className="timer-value">{formatTime(timeLeft.seconds)}</span>
         </div>
       </div>
-      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between',  }}>
+      <div style={{ display: 'flex', gap: '2rem' }}>
+        <div className="question-section">
+          <div className="section-header">
+            <h2>{currentSection}</h2>
+            <p className="recommended-time">Recommended Time: {allQuestions[currentStep].recommendedTime} minutes</p>
+          </div>
+          <div className="question">
+            <div dangerouslySetInnerHTML={{ __html: allQuestions[currentStep].text }} />
+          </div>
+        </div>
+        <div className="answer-section">
+          <textarea
 
-      <div className="question-section"  style={{flex: 1}}>
-        <div className="section-header">
-          <h2>{currentSection}</h2>
-          <p className="recommended-time">Recommended Time: {allQuestions[currentStep].recommendedTime} minutes</p>
-        </div>
-        <div className="question">
-          {/* <h3>{allQuestions[currentStep].text}</h3> */}
-          <div dangerouslySetInnerHTML={{ __html: allQuestions[currentStep].text }} />
-        </div>
-      </div> 
-      <div className="answer-section" style={{flex: 1}}>
-        <textarea
-          value={currentAnswer}
-          onChange={(e) => setCurrentAnswer(e.target.value)}
-          style={{ width: '90%', height: '100px', border: '1px solid #ccc', borderRadius: '5px', padding: '10px' }}
-          placeholder="Type your answer here..."
+          style={{width: '94%'}}
+            value={currentAnswer}
+            onChange={(e) => setCurrentAnswer(e.target.value)}
+            placeholder="Type your answer here..."
           />
-        <div className="question-navigation">
-          <div className="question-progress">
-            Question {currentStep + 1} of {allQuestions.length}
-          </div>
-          <div>
-            {currentStep > 0 && (
-              <button onClick={handlePrevious}>Previous</button>
-            )}
-            <button 
-              onClick={handleNext}
-            >
-              {currentStep === allQuestions.length - 1 ? 'Review' : 'Next'}
-            </button>
+          <div className="question-navigation">
+            <div className="question-progress">
+              Question {currentStep + 1} of {allQuestions.length}
+            </div>
+            <div>
+              {currentStep > 0 && (
+                <button onClick={handlePrevious} style={{marginRight: '1rem'}}>Previous</button>
+              )}
+              <button onClick={handleNext}>
+                {currentStep === allQuestions.length - 1 ? 'Review' : 'Next'}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   )

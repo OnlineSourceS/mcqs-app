@@ -173,7 +173,12 @@ export function AdminDashboard() {
                 {selectedResult.answers.map((answer, index) => {
                   const question = getQuestionById(answer.questionId);
                   return (
-                    <div key={index} className="qa-pair">
+                    <div key={index} className="qa-pair" style={{
+                        overflowY: 'scroll',
+                        height: '44rem'
+                        
+                        
+                    }}>
                       <div className="question-container">
                         <h4>Question {answer.questionId}:</h4>
                         {question ? (
@@ -184,7 +189,7 @@ export function AdminDashboard() {
                       </div>
                       <div className="answer-container">
                         <h4>Answer:</h4>
-                        <pre>{answer.answer}</pre>
+                        <pre style={{whiteSpace: 'pre-wrap', wordWrap: 'break-word', textAlign: 'left'}}>{answer.answer}</pre>
                       </div>
                     </div>
                   );
