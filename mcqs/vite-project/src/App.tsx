@@ -11,7 +11,7 @@ function AppContent() {
   const isAdmin = user?.email === 'admin@admin.com' || user?.email === 'admin@gmail.com'
   console.log(user, 'user')
   return (
-    <div className="app">
+   <>
       <header>
         <h1>Techmile Solutions</h1>
         {user && <p>Welcome, {user.email}</p>}
@@ -24,8 +24,8 @@ function AppContent() {
         ) : (
           <QuestionForm />
         )}
-      </main>
-    </div>
+      </main> 
+        </>
   )
 }
 
