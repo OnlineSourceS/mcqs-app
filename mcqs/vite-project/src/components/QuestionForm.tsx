@@ -3,12 +3,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { supabase } from '../lib/supabase'
 import { TABLES } from '../constants/supabase'
 
-interface Question {
-  id: number
-  text: string
-  section: string
-  recommendedTime: string
-}
+ 
 
 interface Answer {
   questionId: number
@@ -390,6 +385,7 @@ Ensure proper encapsulation, inheritance (where appropriate), and demonstrate po
       if (error) throw error
       // Clear localStorage after successful submission
       localStorage.removeItem('assessmentAnswers')
+      
       alert('Form submitted successfully!')
     } catch (error) {
       console.error('Error submitting form:', error)
