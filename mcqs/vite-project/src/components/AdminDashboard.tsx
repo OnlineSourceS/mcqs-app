@@ -252,8 +252,9 @@ export function AdminDashboard() {
                         </PDFDownloadLink>
                       ) : (
                         <button 
-                          className="export-btn"
-                          style={{ padding: '17px', borderRadius: '6px' }}
+                          className=""
+                          
+                          style={{ padding: '17px', borderRadius: '6px',  }}
                           onClick={() => handleExportClick(result.id)}
                         >
                           Export
