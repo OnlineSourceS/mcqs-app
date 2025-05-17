@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { TABLES } from '../constants/supabase';
 import './AdminDashboard.css';
+import { Document, Page, Text, View, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
 
 // Import questions from QuestionForm
 import { sections, Question } from './QuestionForm';
@@ -22,10 +23,115 @@ interface Result {
   };
 }
 
+// Helper functions
+const formatDate = (dateString: string) => {
+  return new Date(dateString).toLocaleDateString();
+};
+
+const calculateTimeTaken = (start: string, end: string | null) => {
+  if (!end) return 'In Progress';
+  const startTime = new Date(start).getTime();
+  const endTime = new Date(end).getTime();
+  const diff = endTime - startTime;
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  return `${hours}h ${minutes}m`;
+};
+
+const getQuestionById = (id: number): Question | undefined => {
+  const allQuestions = Object.values(sections).flat();
+  return allQuestions.find(q => q.id === id);
+};
+
+// Function to convert HTML to plain text
+const htmlToText = (html: string): string => {
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = html;
+  return tempDiv.textContent || tempDiv.innerText || '';
+};
+
+// PDF Document Component
+const ResultPDF = ({ result }: { result: Result }) => {
+  const styles = StyleSheet.create({
+    page: {
+      padding: 30,
+      fontSize: 12,
+    },
+    header: {
+      fontSize: 20,
+      marginBottom: 20,
+      textAlign: 'center',
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+    },
+    title: {
+      fontSize: 16,
+      marginBottom: 10,
+    },
+    text: {
+    // color: 'grey',
+    fontWeight: 'semibold',
+      marginBottom: 5,
+    },
+    question: {
+    // color: 'grey
+      marginTop: 14,
+      marginBottom: 5,
+      fontSize: 18,
+      
+      fontWeight : 'bold',
+    },
+    answer: {
+      marginBottom: 15,
+      padding: 5,
+      backgroundColor: '#f5f5f5',
+    },
+  });
+
+  return (
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <Text style={styles.header}>Test Result Details</Text>
+        
+        <View style={styles.section}>
+          <Text style={styles.title}>Student Information</Text>
+          <Text style={styles.text}>Name: {result.user?.name || 'N/A'}</Text>
+          <Text style={styles.text}>Email: {result.user?.email}</Text>
+          <Text style={styles.text}>Phone: {result.user?.phone_number || 'N/A'}</Text>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.title}>Test Information</Text>
+          <Text style={styles.text}>Start Time: {formatDate(result.start_at)}</Text>
+          <Text style={styles.text}>Completion Time: {result.completed_at ? formatDate(result.completed_at) : 'In Progress'}</Text>
+          <Text style={styles.text}>Time Taken: {calculateTimeTaken(result.start_at, result.completed_at)}</Text>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.title}>Questions and Answers</Text>
+          {result.answers.map((answer, index) => {
+            const question = getQuestionById(answer.questionId);
+            return (
+              <View key={index}>
+                <Text style={styles.question}>Question {answer.questionId}:</Text>
+                <Text style={styles.text}>{question ? htmlToText(question.text) : 'Question not found'}</Text>
+                <Text style={styles.answer}>Answer: {answer.answer}</Text>
+              </View>
+            );
+          })}
+        </View>
+      </Page>
+    </Document>
+  );
+};
+
 export function AdminDashboard() {
   const [results, setResults] = useState<Result[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedResult, setSelectedResult] = useState<Result | null>(null);
+  const [generatingPdf, setGeneratingPdf] = useState<string | null>(null);
 
   useEffect(() => {
     fetchResults();
@@ -64,24 +170,8 @@ export function AdminDashboard() {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    // format date to dd/mm/yyyy i want only date not time
-    return new Date(dateString).toLocaleDateString();
-  };
-
-  const calculateTimeTaken = (start: string, end: string | null) => {
-    if (!end) return 'In Progress';
-    const startTime = new Date(start).getTime();
-    const endTime = new Date(end).getTime();
-    const diff = endTime - startTime;
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    return `${hours}h ${minutes}m`;
-  };
-
-  const getQuestionById = (id: number): Question | undefined => {
-    const allQuestions = Object.values(sections).flat();
-    return allQuestions.find(q => q.id === id);
+  const handleExportClick = (resultId: string) => {
+    setGeneratingPdf(resultId);
   };
 
   if (loading) {
@@ -137,13 +227,38 @@ export function AdminDashboard() {
                       </span>
                     </td>
                     <td>{calculateTimeTaken(result.start_at, result.completed_at)}</td>
-                    <td>
+                    <td className="action-buttons">
                       <button 
                         onClick={() => setSelectedResult(result)}
                         className="view-details-btn"
                       >
                         View Details
                       </button>
+                      {generatingPdf === result.id ? (
+                        <PDFDownloadLink
+                          document={<ResultPDF result={result} />}
+                          fileName={`test-result-${result.user?.name || 'student'}-${formatDate(result.start_at)}.pdf`}
+                          className=" "
+                        >
+                          {({ loading }) => (
+                            <button 
+                              className=" " 
+                              style={{ padding: '17px', borderRadius: '6px' }} 
+                              disabled={loading}
+                            >
+                              {loading ? 'wait...' : 'Download'}
+                            </button>
+                          )}
+                        </PDFDownloadLink>
+                      ) : (
+                        <button 
+                          className="export-btn"
+                          style={{ padding: '17px', borderRadius: '6px' }}
+                          onClick={() => handleExportClick(result.id)}
+                        >
+                          Export
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}
